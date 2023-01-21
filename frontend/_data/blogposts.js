@@ -27,10 +27,18 @@ async function getAllBlogposts() {
             articles {
               data  {
                 attributes {
+                  author
                   title
                   content
                   createdAt
                   slug
+                  tags {
+                    data {
+                      attributes {
+                        name
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -52,7 +60,7 @@ async function getAllBlogposts() {
 
       // update blogpost array with the data from the JSON response
       blogposts = blogposts.concat(response.data.articles.data);
-      console.log(response.data.articles.data, blogposts[0].attributes.slug);
+      // console.log(response.data.articles.data, blogposts[1].attributes.tags);
       // prepare for next query
       recordsToSkip += recordsPerQuery;
 
@@ -61,9 +69,6 @@ async function getAllBlogposts() {
       if (response.data.articles.data.length < recordsPerQuery) {
         makeNewQuery = false;
       }
-
-      //changed to stop LOOP!!! caused by above code
-      // makeNewQuery = false;
     } catch (error) {
       throw new Error(error);
     }
@@ -71,6 +76,16 @@ async function getAllBlogposts() {
 
   // format blogposts objects
   const blogpostsFormatted = blogposts.map((item) => {
+    const tagArr = [];
+    let data = item.attributes.tags.data;
+    if (data) {
+      data.map((val) => {
+        let attr = val.attributes;
+        tagArr.push(attr.name);
+      });
+    }
+
+    // console.log(tagArr);
     return {
       id: item.attributes.id,
       title: item.attributes.title,
@@ -78,6 +93,7 @@ async function getAllBlogposts() {
       body: item.attributes.content,
       author: item.attributes.author,
       date: item.attributes.published_at,
+      tags: tagArr,
     };
   });
 

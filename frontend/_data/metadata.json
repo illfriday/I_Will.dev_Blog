@@ -2,9 +2,9 @@
   "title": "I_Will_Dev",
   "url": "https://example.com/",
   "language": "en",
-  "description": "I am writing about my experiences as a naval navel-gazer.",
+  "description": "Will Prouty's personal blog about my development journey and life experiences.",
   "feed": {
-    "subtitle": "I am writing about my experiences as a naval navel-gazer.",
+    "subtitle": "Will Prouty's personal blog about my development journey and life experiences.",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
     "id": "https://example.com/"
@@ -14,8 +14,8 @@
     "url": "https://example.com/feed/feed.json"
   },
   "author": {
-    "name": "Your Name Here",
-    "email": "youremailaddress@example.com",
-    "url": "https://example.com/about-me/"
+    "name": "Will Prouty",
+    "email": "willprouty@gmail.com",
+    "url": "https://willprouty.com"
   }
 }
