@@ -14,6 +14,8 @@ permalink: blog/{{ blogpost.slug }}/index.html
   {# blogpost #}
 
   <h1>{{ blogpost.title }}</h1>
+  <p><time class="postlist-date" datetime="{{ blogpost.date | log}}">{{ blogpost.date.toString()  }}</time></p>
+   
 {{ blogpost.body | safe }}
 
   {# related blogposts #}

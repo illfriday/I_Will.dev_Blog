@@ -30,7 +30,7 @@ async function getAllBlogposts() {
                   author
                   title
                   content
-                  createdAt
+                  published_date
                   slug
                   tags {
                     data {
@@ -92,8 +92,9 @@ async function getAllBlogposts() {
       slug: item.attributes.slug,
       body: item.attributes.content,
       author: item.attributes.author,
-      date: item.attributes.published_at,
+      date: item.attributes.published_date,
       tags: tagArr,
+      // tags: item.attributes.tags.attributes,
     };
   });
 
