@@ -26,6 +26,24 @@ module.exports = function (eleventyConfig) {
     return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
   });
 
+  eleventyConfig.addFilter("getPostsByTag", function (posts, tag) {
+    let taggedPosts = [];
+    for (i = 0; i < posts.length; i++) {
+      // console.log(i, posts[i].tags, tag);
+      for (n = 0; n < posts[i].tags.length; n++) {
+        // console.log(posts[i].tags[n], JSON.stringify(tag[0]));
+        JSON.stringify(posts[i].tags[n]) == JSON.stringify(tag[0])
+          ? taggedPosts.push(posts[i])
+          : null;
+      }
+      // console.log(JSON.stringify(posts[i].tags) === JSON.stringify(tag));
+      // posts[i].tags.includes(JSON.stringify(tag))
+      //   ? taggedPosts.push(posts[i])
+      //   : null;
+    }
+    // console.log(taggedPosts);
+    return taggedPosts;
+  });
   // Get the first `n` elements of a collection.
   eleventyConfig.addFilter("head", (array, n) => {
     if (n < 0) {
@@ -38,31 +56,39 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addCollection("tagList", function (collection) {
     let tagSet = new Set();
     collection.getAll().forEach(function (item) {
-      // console.log(item.data.tags);
-      if ("tags" in item.data) {
-        let tags = item.data.tags;
+      // console.log(item.data.blogposts);
 
-        tags = tags.filter(function (item) {
-          switch (item) {
-            // this list should match the `filter` list in tags.njk
-            case "all":
-            case "nav":
-            case "post":
-            case "posts":
-            case "tagList":
-              return false;
-          }
-
-          return true;
-        });
-
-        for (const tag of tags) {
+      for (let i = 0; i < item.data.blogposts.length; i++) {
+        // console.log(item.data.blogposts[i].tags, `post #${i}`);
+        item.data.blogposts[i].tags.forEach(function (tag) {
           tagSet.add(tag);
-        }
+        });
       }
+      // if ("tags" in item.data.blogposts) {
+      //   let tags = item.data.blogposts.tags.values();
+      //   console.log(tags);
+      //   tags = tags.filter(function (item) {
+      //     switch (item) {
+      //       // this list should match the `filter` list in tags.njk
+      //       case "all":
+      //       case "nav":
+      //       case "post":
+      //       case "posts":
+      //       case "tagList":
+      //         return false;
+      //     }
+
+      //     return true;
+      //   });
+
+      //   for (const tag of tags) {
+      //     tagSet.add(tag);
+      //   }
+      // }
     });
 
     // returning an array in addCollection works in Eleventy 0.5.3
+    // console.log([...tagSet]);
     return [...tagSet];
   });
 
