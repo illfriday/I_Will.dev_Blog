@@ -19,8 +19,8 @@ eleventyComputed:
 permalink: /tags/{{ tag }}/
 ---
 <h1>Tagged “{{ tag }}”</h1>
-{# {{ blogposts | log }}
-{{ collections.tagList | log}} #}
+{{ blogposts | log }}
+{# {{ collections.tagList | log}} #}
 
 {% set postslist = blogposts | getPostsByTag([tag])  %}
 {# {% set postslist = collections.tagList [ tag ] %} #}

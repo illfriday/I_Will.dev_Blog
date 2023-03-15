@@ -26,6 +26,7 @@ async function getAllBlogposts() {
           query: ` {
             articles {
               data  {
+                id
                 attributes {
                   author
                   title
@@ -87,7 +88,7 @@ async function getAllBlogposts() {
 
     // console.log(tagArr);
     return {
-      id: item.attributes.id,
+      id: parseInt(item.id),
       title: item.attributes.title,
       slug: item.attributes.slug,
       body: item.attributes.content,
