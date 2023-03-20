@@ -6,7 +6,7 @@ eleventyNavigation:
   order: 4
 pagination:
   data: blogposts
-  size: 12
+  size: 4
 permalink: blog{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber + 1}}{% endif %}/index.html
 ---
 
@@ -24,7 +24,7 @@ permalink: blog{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber +
         <h2><a href="/blog/{{ item.slug }}">{{ item.title }} </a></h2>
         <p>by {{ item.author }}  </p>
         <time class="postlist-date" datetime="{{ item.date }}">{{ item.date.toString() }}</time>
-        {{ item.tags }}
+
         {% for tag in item.tags%}
 
 
