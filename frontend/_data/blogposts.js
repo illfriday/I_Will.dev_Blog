@@ -75,6 +75,9 @@ async function getAllBlogposts() {
     }
   }
 
+  // const related = (arr) => {
+  //   console.log(arr);
+  // };
   // format blogposts objects
   const blogpostsFormatted = blogposts.map((item) => {
     const tagArr = [];
@@ -85,8 +88,22 @@ async function getAllBlogposts() {
         tagArr.push(attr.name);
       });
     }
-
     // console.log(tagArr);
+    const related = (arr) => {
+      const relatedPosts = [];
+      arr.map((tag) => {
+        blogposts.map((item) => {
+          // console.log(item.attributes.tags);
+          item.attributes.tags.data.map((itTag) => {
+            itTag.attributes.name == tag && !relatedPosts.includes(item)
+              ? relatedPosts.push(item)
+              : null;
+          });
+        });
+      });
+      return relatedPosts;
+    };
+
     return {
       id: parseInt(item.id),
       title: item.attributes.title,
@@ -95,7 +112,7 @@ async function getAllBlogposts() {
       author: item.attributes.author,
       date: item.attributes.published_date,
       tags: tagArr,
-      // tags: item.attributes.tags.attributes,
+      relatedBlogs: related(tagArr),
     };
   });
 

@@ -28,7 +28,8 @@ tags: [{{ blogpost.tags }}]
 
 
   {# related blogposts #}
-  {% if blogpost.relatedBlogs|length %}
+
+  {% if blogpost.relatedBlogs | length %}
     <h2>You might also like</h2>
     <ul>
     {% for item in blogpost.relatedBlogs %}
