@@ -13,9 +13,9 @@ templateClass: tmpl-post
 
 {{ content | safe }}
 
-{%- if collections.posts %}
-{%- set nextPost = collections.posts | getNextCollectionItem(page) %}
-{%- set previousPost = collections.posts | getPreviousCollectionItem(page) %}
+{%- if collections.blogposts %}
+{%- set nextPost = collections.blogposts | getNextCollectionItem(page) %}
+{%- set previousPost = collections.blogposts | getPreviousCollectionItem(page) %}
 {%- if nextPost or previousPost %}
 <hr>
 <ul>

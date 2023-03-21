@@ -21,6 +21,26 @@ module.exports = function (eleventyConfig) {
     );
   });
 
+  eleventyConfig.addFilter("hrefToTitle", (href) => {
+    const hrefArr = href.split("/");
+    const titleArr = hrefArr[2].replaceAll("_", " ");
+    let title = titleArr.split(" ");
+
+    function capitalizeFirstLetter(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    const newTitle = [];
+
+    for (i = 0; i < title.length; i++) {
+      // console.log(title[i]);
+      const capTitle = capitalizeFirstLetter(title[i]);
+      newTitle.push(capTitle);
+    }
+    // console.log(newTitle);
+
+    return newTitle.join(" ");
+  });
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
   eleventyConfig.addFilter("htmlDateString", (dateObj) => {
     return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
