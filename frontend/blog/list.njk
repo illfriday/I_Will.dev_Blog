@@ -28,7 +28,7 @@ permalink: blog{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber +
         {% for tag in item.tags%}
 
 
-          <h4><a href="/tags/{{ tag | slugify }}">{{ tag }} </a></h4>
+          <h4><a href="/tags/{{ tag | slugify }}" class="post-tag">{{ tag }} </a></h4>
         {% endfor %}
         {# <h2><a href="/tags/{{ item.tags }}">{{ item.tags }} </a></h2> #}
         <br>

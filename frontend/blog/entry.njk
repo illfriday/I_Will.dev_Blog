@@ -22,7 +22,7 @@ tags: [{{ blogpost.tags }}]
 
   {% for tag in blogpost.tags %}
   {% set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-    <a href="{{ tagUrl | url }}">{{ tag }}</a>
+    <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
   {% endfor %}
    
 

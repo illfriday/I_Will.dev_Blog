@@ -2,14 +2,14 @@ const { DateTime } = require("luxon");
 const fs = require("fs");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const pluginNavigation = require("@11ty/eleventy-navigation");
+const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(pluginSyntaxHighlight);
-  eleventyConfig.addPlugin(pluginNavigation);
+  eleventyConfig.addPlugin(eleventyNavigationPlugin);
 
   eleventyConfig.setDataDeepMerge(true);
 
@@ -36,10 +36,6 @@ module.exports = function (eleventyConfig) {
           ? taggedPosts.push(posts[i])
           : null;
       }
-      // console.log(JSON.stringify(posts[i].tags) === JSON.stringify(tag));
-      // posts[i].tags.includes(JSON.stringify(tag))
-      //   ? taggedPosts.push(posts[i])
-      //   : null;
     }
     // console.log(taggedPosts);
     return taggedPosts;
@@ -64,27 +60,6 @@ module.exports = function (eleventyConfig) {
           tagSet.add(tag);
         });
       }
-      // if ("tags" in item.data.blogposts) {
-      //   let tags = item.data.blogposts.tags.values();
-      //   console.log(tags);
-      //   tags = tags.filter(function (item) {
-      //     switch (item) {
-      //       // this list should match the `filter` list in tags.njk
-      //       case "all":
-      //       case "nav":
-      //       case "post":
-      //       case "posts":
-      //       case "tagList":
-      //         return false;
-      //     }
-
-      //     return true;
-      //   });
-
-      //   for (const tag of tags) {
-      //     tagSet.add(tag);
-      //   }
-      // }
     });
 
     // returning an array in addCollection works in Eleventy 0.5.3

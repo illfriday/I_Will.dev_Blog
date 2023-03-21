@@ -1,0 +1,22 @@
+[
+  {
+    "name": "github",
+    "iconClass": "fab fa-github",
+    "url": "https://github.com/illfriday"
+  },
+  {
+    "name": "linkedin",
+    "iconClass": "fab fa-linkedin",
+    "url": "https://www.linkedin.com/in/will-prouty-07882b93/"
+  },
+  {
+    "name": "spotify",
+    "iconClass": "fab fa-spotify",
+    "url": "https://open.spotify.com/user/122458679"
+  },
+  {
+    "name": "instagram",
+    "iconClass": "fab fa-instagram",
+    "url": "https://www.instagram.com/illfriday/"
+  }
+]
