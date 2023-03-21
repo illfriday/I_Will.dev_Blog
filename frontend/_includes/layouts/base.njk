@@ -33,7 +33,7 @@
     {% include 'layouts/navigation.njk' %}
     
     <main{% if templateClass %} class="{{ templateClass }}"{% endif %}>
-      <div class="bg-white">
+      <div class="bg-white rounded">
       {{ content | safe }}
       </div>
     </main>

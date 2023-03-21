@@ -17,8 +17,8 @@ tags: blogposts
 
   <h1 class="text-center pt-2">{{ blogpost.title }}</h1>
  
-  <div class="px-4">
-    <div class="card px-2 mb-3">
+  <div class="px-4 rounded">
+    <div class="card px-2 mb-3" >
       <article class="card-body px-2 py-3">
         {{ blogpost.body | safe }}
         <span class="px-2">
@@ -41,21 +41,21 @@ tags: blogposts
    
    {# Previous/Next Blogposts #}
   {% if pagination.previousPageLink %}  
-  <div class="page-item mb-4">
+  <div class="page-item mb-4  d-inline">
     <span class="pr-2 mb-2">Previous Post:</span><a  href="{{ pagination.previousPageHref | url }}"><i class="fas fa-arrow-left"></i><span class="px-2">{{ pagination.href.previous | hrefToTitle }}</span></a>
   </div>
   {% else %} 
-  <div class="page-item disabled">
+  <div class="page-item disabled  d-inline d-inline">
     <span class="d-inline px-2">Previous Post Unavailable<span/>
     <a class="page-link disabled d-inline px-2 py-0 border-0" href="{{ pagination.previousPageHref | url }}"><i class="fas fa-arrow-left"></i></a>
   </div>
   {% endif %}
   {% if pagination.nextPageLink %}  
-  <div class="page-item">
-    <span class="pl-2">Next Post:</span><a  href="{{ pagination.nextPageHref | url }}"><span class="px-2">{{ pagination.href.next | hrefToTitle }}</span><i class="fas fa-arrow-right"></i></a>
+  <div class="page-item  d-inline d-inline">
+    <span class="pl-2 ">Next Post:</span><a  href="{{ pagination.nextPageHref | url }}"><span class="px-2">{{ pagination.href.next | hrefToTitle }}</span><i class="fas fa-arrow-right"></i></a>
   </div>
   {% else %} 
-  <div class="page-item disabled ">
+  <div class="page-item disabled   d-inline d-inline">
     <span class="d-inline px-2">Next Post Unavailable<span/>
     <a class="page-link disabled d-inline px-2 py-0 border-0" href="{{ pagination.nextPageHref | url }}"><i class="fas fa-arrow-right"></i></a>
   </div>
@@ -64,7 +64,7 @@ tags: blogposts
   {# related blogposts #}
 
   {% if blogpost.relatedBlogs | length %}
-    <div class=" pt-2 mx-4">
+    <div class=" py-2 mx-4">
     <h5>You might also like</h5>
     <ul>
     {% for item in blogpost.relatedBlogs %}
