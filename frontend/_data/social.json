@@ -1,5 +1,10 @@
 [
   {
+    "name": "gmail",
+    "iconClass": "fas fa-envelope",
+    "url": "https://mail.google.com/mail/?view=cm&source=mailto&to=willprouty@gmail.com"
+  },
+  {
     "name": "github",
     "iconClass": "fab fa-github",
     "url": "https://github.com/illfriday"
