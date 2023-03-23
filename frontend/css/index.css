@@ -236,7 +236,10 @@ a[href].post-tag:focus {
     --color-infobox: #082840;
   }
 }
-
+.page-header {
+  text-align: center;
+  padding-top: 0.75rem;
+}
 .page-item {
   margin-bottom: 0;
   display: inline;
@@ -266,4 +269,11 @@ a[href].direct-link:focus:visited,
 :hover > a[href].direct-link,
 :hover > a[href].direct-link:visited {
   color: #aaa;
+}
+
+/* for mobile */
+@media only screen and (max-width: 600px) {
+  .mobileHidden {
+    display: none;
+  }
 }
