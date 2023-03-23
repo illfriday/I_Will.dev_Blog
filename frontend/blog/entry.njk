@@ -41,21 +41,21 @@ tags: blogposts
    
    {# Previous/Next Blogposts #}
   {% if pagination.previousPageLink %}  
-  <div class="page-item class="d-inline" mb-4">
+  <div class="page-item d-inline-flex flex-no-wrap mb-4">
     <span class="pr-2 mb-2  mobileHidden">Previous Post:</span><a  class="d-inline" href="{{ pagination.previousPageHref | url }}"><i class=" fas fa-arrow-left"></i><span class="px-2">{{ pagination.href.previous | hrefToTitle }}</span></a>
   </div>
   {% else %} 
-  <div class="page-item disabled d-inline">
+  <div class="page-item disabled d-inline-flex flex-no-wrap">
     <span class=" mobileHidden px-2">No Earlier Posts<span/>
     <a class="page-link disabled d-inline px-2 py-0 border-0" href="{{ pagination.previousPageHref | url }}"><i class="fas fa-arrow-left"></i></a>
   </div>
   {% endif %}
   {% if pagination.nextPageLink %}  
-  <div class="page-item d-inline">
+  <div class="page-item d-inline-flex flex-no-wrap">
     <span class="pl-2  mobileHidden">Next Post:</span><a class="d-inline" href="{{ pagination.nextPageHref | url }}"><span class="px-2">{{ pagination.href.next | hrefToTitle }}</span><i class="fas fa-arrow-right"></i></a>
   </div>
   {% else %} 
-  <div class="page-item disabled d-inline">
+  <div class="page-item disabled d-inline-flex flex-no-wrap">
     <span class=" mobileHidden px-2">No More Recent Posts<span/>
     <a class="page-link disabled d-inline px-2 py-0 border-0" href="{{ pagination.nextPageHref | url }}"><i class="fas fa-arrow-right"></i></a>
   </div>
