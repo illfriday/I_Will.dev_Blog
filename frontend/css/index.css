@@ -240,9 +240,14 @@ a[href].post-tag:focus {
   text-align: center;
   padding-top: 0.75rem;
 }
+.page-link {
+  display: inline;
+  padding: 0 0.75rem 0 0.75rem;
+}
 .page-item {
   margin-bottom: 0;
-  display: inline;
+  display: inline-flex;
+  flex-wrap: none;
 }
 .infobox {
   background-color: var(--color-infobox);
