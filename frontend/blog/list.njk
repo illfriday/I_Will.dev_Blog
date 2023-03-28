@@ -14,38 +14,47 @@ permalink: blog{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber +
 {% set htmlTitle = item.title %}
 
 {% block content %}
-  <h2>Unfiltered, raw and probably full of typos</h2>
+  <div class="col-12">
+    {# card #}
+    <h2 class="page-header">I-Will_Blog</h2>
+    
+    {# loop through paginated item #}
+    {% for item in pagination.items %}
+      {# {% if loop.first %}<ul>{% endif %} #}
+        
+        <div class="card px-3 py-3 my-5 mx-5">
+          <div >
+            <h2 class="card-title my-0"><a href="/blog/{{ item.slug }}">{{ item.title }} </a></h2>
+            <div>
+              <p class="card-subtitle d-inline ml-1">by {{ item.author }} </p>
+              <time class="postlist-date  d-inline pl-2" datetime="{{ item.date }}">{{ item.date.toString() }}</time>
+            </div>
+            
+          </div>
+          <div class="card-body">
+            <p>{{ item.body  }}</p>
+            {# display post tags #}
+            {% for tag in item.tags%}
+            <h5 class=" d-inline"><a href="/tags/{{ tag | slugify }}" class="post-tag">{{ tag }} </a></h4>
+            {% endfor %}
+          </div>
+        </div>
+          
+          
+          
+      {# {% if loop.last %}</ul>{% endif %} #}
+    {% endfor %}
 
-  {# loop through paginated item #}
-  {% for item in pagination.items %}
-    {% if loop.first %}<ul>{% endif %}
-      
-      <li>
-        <h2><a href="/blog/{{ item.slug }}">{{ item.title }} </a></h2>
-        <p>by {{ item.author }}  </p>
-        <time class="postlist-date" datetime="{{ item.date }}">{{ item.date.toString() }}</time>
-
-        {% for tag in item.tags%}
-
-
-          <h4><a href="/tags/{{ tag | slugify }}">{{ tag }} </a></h4>
-        {% endfor %}
-        {# <h2><a href="/tags/{{ item.tags }}">{{ item.tags }} </a></h2> #}
-        <br>
-      </li>
-    {% if loop.last %}</ul>{% endif %}
-  {% endfor %}
-
-  {# pagination #}
-  {% if pagination.hrefs | length > 0 %}
-  <ul>
-    {% if pagination.previousPageHref %}
-      <li><a href="{{ pagination.previousPageHref }}">Previous page</a></li>
+    {# pagination #}
+    {% if pagination.hrefs | length > 0 %}
+    <div class="col">
+      {% if pagination.previousPageHref %}
+        <button class="btn border-1 mb-3" ><a href="{{ pagination.previousPageHref }}">Previous page</a></button>
+      {% endif %}
+      {% if pagination.nextPageHref %}
+        <button class="btn btn-outline-secondary mb-3"><a href="{{ pagination.nextPageHref }}">Next page</a></button>
+      {% endif %}
+    </div>
     {% endif %}
-    {% if pagination.nextPageHref %}
-      <li><a href="{{ pagination.nextPageHref }}">Next page</a></li>
-    {% endif %}
-  </ul>
-  {% endif %}
-
+  </div>
 {% endblock %}

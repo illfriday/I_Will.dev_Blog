@@ -6,7 +6,7 @@ pagination:
   size: 1
   alias: blogpost
 permalink: blog/{{ blogpost.slug }}/index.html
-tags: [{{ blogpost.tags }}]
+tags: blogposts
 ---
 {# {{ collections | log }} #}
 {% include "postslist.njk" %}
@@ -15,22 +15,60 @@ tags: [{{ blogpost.tags }}]
 {% block content %}
   {# blogpost #}
 
-  <h1>{{ blogpost.title }}</h1>
-  <p><time class="postlist-date" datetime="{{ blogpost.date }}">{{ blogpost.date.toString() }}</time></p>
+  <h1 class="page-header">{{ blogpost.title }}</h1>
+ 
+  <div class="px-4 rounded">
+    <div class="card px-2 mb-3" >
+      <article class="card-body px-2 py-3">
+        {{ blogpost.body | safe }}
+        <span class="px-2">
+          <time class="postlist-date" datetime="{{ blogpost.date }}">{{ blogpost.date.toString() }}</time>
+        </span>
+        
+  
+    
+    {# Blogpost Tags #}
+        <div class="page-item d-block mt-1">
+        {% for tag in blogpost.tags %}
+        {% set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
+          <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
+        {% endfor %}
+        </div>
+      </article>
+      
+    </div>
+    
    
-  <p>{{ blogpost.body | safe }}</p>
-
-  {% for tag in blogpost.tags %}
-  {% set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-    <a href="{{ tagUrl | url }}">{{ tag }}</a>
-  {% endfor %}
-   
-
-
+   {# Previous/Next Blogposts #}
+   <div class="d-flex justify-content-around">
+    {% if pagination.previousPageLink %}  
+  <div class="page-item mb-4">
+    <span class="pr-2 mb-2 mobileHidden">Previous Post:</span><a class="d-inline" href="{{ pagination.previousPageHref | url }}"><i class=" fas fa-arrow-left"></i><span class="px-2">{{ pagination.href.previous | hrefToTitle }}</span></a>
+  </div>
+  {% else %} 
+  <div class="page-item disabled ">
+    <span class=" mobileHidden px-2">No Earlier Posts<span/>
+    <a class="page-link disabled  border-0" href="{{ pagination.previousPageHref | url }}"><i class="fas fa-arrow-left"></i></a>
+  </div>
+  {% endif %}
+  {% if pagination.nextPageLink %}  
+  <div class="page-item ">
+    <span class="pl-2 mobileHidden">Next Post:</span><a class="d-inline" href="{{ pagination.nextPageHref | url }}"><span class="px-2">{{ pagination.href.next | hrefToTitle }}</span><i class="fas fa-arrow-right"></i></a>
+  </div>
+  {% else %} 
+  <div class="page-item disabled ">
+    <span class=" mobileHidden px-2">No More Recent Posts<span/>
+    <a class="page-link disabled  border-0" href="{{ pagination.nextPageHref | url }}"><i class="fas fa-arrow-right"></i></a>
+  </div>
+  {% endif %}
+   </div>
+  
+  </div>
   {# related blogposts #}
 
   {% if blogpost.relatedBlogs | length %}
-    <h2>You might also like</h2>
+    <div class=" py-2 mx-4">
+    <h5>You might also like</h5>
     <ul>
     {% for item in blogpost.relatedBlogs %}
       {% for post in blogposts %}
@@ -42,5 +80,8 @@ tags: [{{ blogpost.tags }}]
       {% endfor %}
     {% endfor %}
     </ul>
+    </div>
+
   {% endif %}
+    </div>
 {% endblock %}

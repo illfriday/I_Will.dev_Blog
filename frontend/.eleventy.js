@@ -2,14 +2,14 @@ const { DateTime } = require("luxon");
 const fs = require("fs");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const pluginNavigation = require("@11ty/eleventy-navigation");
+const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(pluginSyntaxHighlight);
-  eleventyConfig.addPlugin(pluginNavigation);
+  eleventyConfig.addPlugin(eleventyNavigationPlugin);
 
   eleventyConfig.setDataDeepMerge(true);
 
@@ -21,6 +21,26 @@ module.exports = function (eleventyConfig) {
     );
   });
 
+  eleventyConfig.addFilter("hrefToTitle", (href) => {
+    const hrefArr = href.split("/");
+    const titleArr = hrefArr[2].replaceAll("_", " ");
+    let title = titleArr.split(" ");
+
+    function capitalizeFirstLetter(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    const newTitle = [];
+
+    for (i = 0; i < title.length; i++) {
+      // console.log(title[i]);
+      const capTitle = capitalizeFirstLetter(title[i]);
+      newTitle.push(capTitle);
+    }
+    // console.log(newTitle);
+
+    return newTitle.join(" ");
+  });
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
   eleventyConfig.addFilter("htmlDateString", (dateObj) => {
     return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
@@ -36,10 +56,6 @@ module.exports = function (eleventyConfig) {
           ? taggedPosts.push(posts[i])
           : null;
       }
-      // console.log(JSON.stringify(posts[i].tags) === JSON.stringify(tag));
-      // posts[i].tags.includes(JSON.stringify(tag))
-      //   ? taggedPosts.push(posts[i])
-      //   : null;
     }
     // console.log(taggedPosts);
     return taggedPosts;
@@ -64,27 +80,6 @@ module.exports = function (eleventyConfig) {
           tagSet.add(tag);
         });
       }
-      // if ("tags" in item.data.blogposts) {
-      //   let tags = item.data.blogposts.tags.values();
-      //   console.log(tags);
-      //   tags = tags.filter(function (item) {
-      //     switch (item) {
-      //       // this list should match the `filter` list in tags.njk
-      //       case "all":
-      //       case "nav":
-      //       case "post":
-      //       case "posts":
-      //       case "tagList":
-      //         return false;
-      //     }
-
-      //     return true;
-      //   });
-
-      //   for (const tag of tags) {
-      //     tagSet.add(tag);
-      //   }
-      // }
     });
 
     // returning an array in addCollection works in Eleventy 0.5.3
