@@ -1,6 +1,5 @@
 
 
-
 <nav class="site-nav family-sans navbar navbar-expand-md bg-dark navbar-dark sticky-top py-0">
   <div class="container-fluid">
     <button type="button" class="navbar-toggler my-2 my-md-0" data-toggle="collapse" data-target="#myTogglerNav" aria-controls="myTogglerNav" aria-label="Toggle Navigation">
@@ -25,11 +24,23 @@
 
 
         <div class="nav-item dropdown ">
-          <a href="" class="nav-link dropdown-toggle t" href="" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded-="false">
+          <a href="" class="nav-link dropdown-toggle" href="" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded-="false">
             <i class="fas fa-user" ></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right">
-            <a href="" class="dropdown-item text-capitalize ml-2">About Me</a>
+            <div class="dropdown">
+              <a href="" class="dropdown-toggle text-capitalize ml-2 id="loginDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded-="false"">Signup</a>
+              <form action="http://localhost:1337/api/auth/local/register/" method="post" >
+                  <label for="username">Username</label>
+                  <input type="text" id="username" name="username"><br><br>
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email"><br><br>
+                  <label for="password">Password:</label>
+                  <input type="password" id="password" name="password"><br><br>
+                  <input type="submit" value="Submit">
+              </form>
+            </div>
+            
             <div class="dropdown-divider"></div>
 
               {% for socialNav in social %}
